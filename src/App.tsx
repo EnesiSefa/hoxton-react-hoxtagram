@@ -13,7 +13,7 @@ function App() {
       fetch("http://localhost:3005/images")
         .then((resp) => resp.json())
         .then((data) => {
-          data = useState(imagesCopy);
+          data = setImages(imagesCopy);
         });
     }, []);
   
