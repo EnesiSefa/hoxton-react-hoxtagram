@@ -1,16 +1,18 @@
-export default function Image ({imagesCopy}){
-    return ( 
+import ImageItem from "./ImageItem";
+export default function Posts({ post, postComments }: any) {
+  return (
     <article className="image-card">
-    <h2 className="title">Title of image goes here</h2>
-    <img src="./assets/image-placeholder.jpg" className="image" />
-    <div className="likes-section">
-      <span className="likes">0 likes</span>
-      <button className="like-button">♥</button>
-    </div>
-    <ul className="comments">
-      {imagesCopy.map((images: any) => (
-        <li>{images.title}</li>
-      ))}
-    </ul>
-  </article>)
+      <h2 className="title">{post.title}</h2>
+      <img src={post.image} className="image" />
+      <div className="likes-section">
+        <span className="likes">{post.likes} likes</span>
+        <button className="like-button">♥</button>
+      </div>
+      <ul className="comments">
+        {postComments.map((comments: any) => (
+          <ImageItem comments={comments} />
+        ))}
+      </ul>
+    </article>
+  );
 }

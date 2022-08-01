@@ -6,35 +6,33 @@ function App() {
   const [images, setImages] = useState([]);
   const [comments, setComments] = useState([]);
 
-  const imagesCopy = structuredClone(images);
-  const commentsCopy = structuredClone(comments);
-
   useEffect(() => {
     fetch("http://localhost:3005/images")
       .then((resp) => resp.json())
-      .then((data) => {
-        data = setImages(imagesCopy);
+      .then((imagesFromServer) => {
+        setImages(imagesFromServer);
+        console.log(imagesFromServer);
       });
   }, []);
-
+ 
+ 
   useEffect(() => {
     fetch("http://localhost:3005/comments")
       .then((resp) => resp.json())
-      .then((data) => {
-        data = setComments(commentsCopy);
+      .then((commentsFromServer) => {
+        setComments(commentsFromServer);
+        console.log(commentsFromServer);
       });
   }, []);
 
-
   return (
     <div className="App">
-      {/* <!-- logo --> */}
       <img className="logo" src="assets/hoxtagram-logo.png" />
 
-      {/* <!-- image cards --> */}
       <section className="image-container">
-        {/* <!-- This is the HTML for each card. Use the following HTML as reference to build your React components --> */}
-        <ImageArticle imagesCopy={imagesCopy} />
+        {images.map((image) => (
+          <ImageArticle  post={image} postComments={comments}/>
+        ))}
       </section>
     </div>
   );
