@@ -7,6 +7,7 @@ function App() {
   const [comments, setComments] = useState([]);
 
   const imagesCopy = structuredClone(images);
+  const commentsCopy = structuredClone(comments);
 
   useEffect(() => {
     fetch("http://localhost:3005/images")
@@ -15,6 +16,15 @@ function App() {
         data = setImages(imagesCopy);
       });
   }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3005/comments")
+      .then((resp) => resp.json())
+      .then((data) => {
+        data = setComments(commentsCopy);
+      });
+  }, []);
+
 
   return (
     <div className="App">
